@@ -31,50 +31,50 @@ var config = {
 	messagingSenderId: "407823664744"
 };
 firebase.initializeApp(config);
-function writeCatData(email, cat) {
-	var date = new Date().toISOString();
-	firebase.database().ref(email + date).set({
-		email: document.getElementById("email").value,
-		date: date,
-		location: document.getElementById("location").value,
-		details: document.getElementById("details").value
-	});
-}
 function write_cat() {
 	var email = document.getElementById("email").value;
 	var date = new Date().toISOString();
 	var location = document.getElementById("location").value;
 	var details = document.getElementById("details").value;
-	document.getElementById("demo").innerHTML = "Yayay " +
-		email + date + location + details;
-		//+ document.getElementById("location").value;
+	document.getElementById("demo").innerHTML =
+		email + "<br>\n"
+		+ date + "<br>\n"
+		+ location + "<br>\n"
+		+ details + "<br>\n";
+	firebase.database().ref(email + " " + date).set({
+		email: email,
+		date: date,
+		location: location,
+		details: details
+	});
 }
 //-->
 </script>
 </head>
 
 <body>
-<h1>Reported Cats</h1>
-<p id="demo"></p>
 <h1>Report a Cat</h1>
 <form name = "report" onsubmit = "write_cat(); return false;">
 	McGill Email: <input type = "text" name = "email" id = "email"><br>
-	Location:<br>
-	<input type = "radio" name = "location" id = "location" value = "Des Pins">Des Pins<br>
-	<input type = "radio" name = "location" id = "location" value = "Prince-Arthur">Prince-Arthur<br>
-	<input type = "radio" name = "location" id = "location" value = "Milton">Milton<br>
-	<input type = "radio" name = "location" id = "location" value = "Sherbrooke">Sherbrooke<br>
-	<input type = "radio" name = "location" id = "location" value = "Université">Université<br>
-	<input type = "radio" name = "location" id = "location" value = "Lorne">Lorne<br>
-	<input type = "radio" name = "location" id = "location" value = "Lorne Crescent">Lorne Crescent<br>
-	<input type = "radio" name = "location" id = "location" value = "Aylmer">Aylmer<br>
-	<input type = "radio" name = "location" id = "location" value = "Durocher">Durocher<br>
-	<input type = "radio" name = "location" id = "location" value = "Hutchison">Hutchison<br>
-	<input type = "radio" name = "location" id = "location" value = "Du Parc">Du Parc<br>
+	Location: <select name = "location" id = "location">
+		<option value = "Des Pins">Des Pins</option>
+		<option value = "Prince-Arthur">Prince-Arthur</option>
+		<option value = "Milton">Milton</option>
+		<option value = "Sherbrooke">Sherbrooke</option>
+		<option value = "Université">Université</option>
+		<option value = "Lorne">Lorne</option>
+		<option value = "Lorne Crescent">Lorne Crescent</option>
+		<option value = "Aylmer">Aylmer</option>
+		<option value = "Durocher">Durocher</option>
+		<option value = "Hutchison">Hutchison</option>
+		<option value = "Du Parc">Du Parc</option>
+	</select><br>
 	Short details:
 	<input type = "text" name = "details" id = "details"><br>
 	<input type = "submit" value = "Submit">
 </form>
+<h1>Reported Cats</h1>
+<p id="demo"></p>
 </body>
 
 </html>
