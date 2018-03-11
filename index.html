@@ -1,10 +1,10 @@
-<!doctype html public "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!doctype html>
 
 <html>
 
 <head>
 <title>Cat</title>
-<meta name = "Content-type" http-equiv = "Content-Type" content = "text/html; charset=us-ascii">
+<meta name = "Content-type" http-equiv = "Content-Type" content = "text/html; charset=UTF-8">
 <meta name = "Keywords" content = "Cat">
 <meta name = "Description" content = "Cat">
 <meta name = "Author" content = "Neil">
@@ -14,22 +14,65 @@
 <link rel = "stylesheet" type = "text/css" href = "style.css">
 
 <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+//<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+//<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script> -->
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCQHSAiFnroAr_PenkVykgzRbPpqcrTaII",
-    authDomain: "cats-293df.firebaseapp.com",
-    databaseURL: "https://cats-293df.firebaseio.com",
-    projectId: "cats-293df",
-    storageBucket: "",
-    messagingSenderId: "407823664744"
-  };
-  firebase.initializeApp(config);
+//<!--
+function write_cat() {
+	alert("Thank you for reporting this encounter.");
+	alert(document.getElementById("location").value);
+	document.getElementById("demo").innerHTML = "Yayay!!!";
+		//document.getElementById("email").value;
+		//+ document.getElementById("location").value;
+}
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyCQHSAiFnroAr_PenkVykgzRbPpqcrTaII",
+	authDomain: "cats-293df.firebaseapp.com",
+	databaseURL: "https://cats-293df.firebaseio.com",
+	projectId: "cats-293df",
+	storageBucket: "",
+	messagingSenderId: "407823664744"
+};
+firebase.initializeApp(config);
+function writeCatData(email, cat) {
+	date = new Date().toISOString();
+	firebase.database().ref(email + date).set({
+		email: email,
+		date: date,
+		location: location,
+		details: details
+	});
+}
+//-->
 </script>
 </head>
 
 <body>
-<p></p>
+<h1>Reported Cats</h1>
+<p id="demo"></p>
+<h1>Report a Cat</h1>
+<form name = "report" onsubmit = "write_cat(); return false;">
+	McGill Email: <input type = "text" name = "email"><br>
+	Location:<br>
+	<input type = "radio" name = "location" value = "Des Pins">Des Pins<br>
+	<input type = "radio" name = "location" value = "Prince-Arthur">Prince-Arthur<br>
+	<input type = "radio" name = "location" value = "Milton">Milton<br>
+	<input type = "radio" name = "location" value = "Sherbrooke">Sherbrooke<br>
+	<input type = "radio" name = "location" value = "Université">Université<br>
+	<input type = "radio" name = "location" value = "Lorne">Lorne<br>
+	<input type = "radio" name = "location" value = "Lorne Crescent">Lorne Crescent<br>
+	<input type = "radio" name = "location" value = "Aylmer">Aylmer<br>
+	<input type = "radio" name = "location" value = "Durocher">Durocher<br>
+	<input type = "radio" name = "location" value = "Hutchison">Hutchison<br>
+	<input type = "radio" name = "location" value = "Du Parc">Du Parc<br>
+	Short details:
+	<input type = "text" name = "details"><br>
+	<input type = "submit" value = "Submit">
+</form>
 </body>
 
 </html>
